@@ -143,6 +143,163 @@ var _hmt = _hmt || [];
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2020/05/28/跨平台开发指北/" >跨平台开发指北</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2020-05-28  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="跨平台APP开发实践（RN、Flutter）"><a href="#跨平台APP开发实践（RN、Flutter）" class="headerlink" title="跨平台APP开发实践（RN、Flutter）"></a>跨平台APP开发实践（RN、Flutter）</h1><hr>
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p><code>跨平台的优势</code>：</p>
+<blockquote>
+<ul>
+<li><code>真正的原生应用</code>：产生的不是网页应用，不是混合应用，而是一个原生的移动应用。</li>
+<li><code>快速开发应用</code>：相比原生漫长的编译过程，Hot Reload简直不要太爽。</li>
+<li><code>可随时呼叫原生外援</code>：完美兼容Java/Swift/OC的组件，一部分用原生一部分用RN来做完全可以。</li>
+<li><code>跨平台</code>：一套业务逻辑代码可以稳定运行在两个平台。</li>
+<li><code>节省劳动力</code>：为企业节省劳动力。。。（不知道算不算好事儿）。</li>
+</ul>
+</blockquote>
+<ul>
+<li><h5 id="使用Flutter的应用：闲鱼、美团B端、阿里（FlutterGo、AliFlutter、淘宝特价版）、字节（今日头条、西瓜视频、皮皮虾）"><a href="#使用Flutter的应用：闲鱼、美团B端、阿里（FlutterGo、AliFlutter、淘宝特价版）、字节（今日头条、西瓜视频、皮皮虾）" class="headerlink" title="使用Flutter的应用：闲鱼、美团B端、阿里（FlutterGo、AliFlutter、淘宝特价版）、字节（今日头条、西瓜视频、皮皮虾）"></a>使用Flutter的应用：闲鱼、美团B端、阿里（FlutterGo、AliFlutter、淘宝特价版）、字节（今日头条、西瓜视频、皮皮虾）</h5></li>
+<li><h5 id="使用React-Native的应用：携程、美团C端、字节（今日头条）、手机QQ、FaceBook"><a href="#使用React-Native的应用：携程、美团C端、字节（今日头条）、手机QQ、FaceBook" class="headerlink" title="使用React Native的应用：携程、美团C端、字节（今日头条）、手机QQ、FaceBook"></a>使用React Native的应用：携程、美团C端、字节（今日头条）、手机QQ、FaceBook</h5></li>
+</ul>
+<p>可以看出RN和Flutter还是呈五五开的发展态势。<br>github：</p>
+<ul>
+<li><a href="https://github.com/facebook/react-native" target="_blank" rel="noopener">react-native</a></li>
+<li><a href="https://github.com/flutter/flutter" target="_blank" rel="noopener">flutter</a></li>
+</ul>
+<p>但是Flutter是在18年底才发行了以第一个稳定版，而React Native是15年就已经推出。这么一看，Flutter突然🔥起来，就1年的时间就挤掉了RN的大半市场，今天我们一起看一下，这两个跨平台的框架究竟有什么神奇的地方。</p>
+<hr>
+<h2 id="1-React-Native的入门与实践"><a href="#1-React-Native的入门与实践" class="headerlink" title="1. React Native的入门与实践"></a>1. React Native的入门与实践</h2><p>React Native是带着React的光环出生的一个跨平台框架，具备React的一切新特性，让从Ionic与HBuilder的时代走过的Hybrid的开发欲罢不能。因为他能通过React的代码与通用的业务逻辑，编写一套完全原生的App应用，而且APP的使用感受与OC/JAVA编写的Native APP完全一致。</p>
+<h3 id="1-搭建环境"><a href="#1-搭建环境" class="headerlink" title="1. 搭建环境"></a>1. 搭建环境</h3><ul>
+<li>node</li>
+<li>watchman: 监视文件并且记录文件的改动情况。</li>
+<li>Android环境：<ul>
+<li>JDK</li>
+<li>Android Studio → Android SDK/Gradle/Android SDK Build-Tools</li>
+</ul>
+</li>
+<li>IOS环境:<ul>
+<li>Xcode</li>
+<li>CocoaPods</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-创建应用"><a href="#2-创建应用" class="headerlink" title="2. 创建应用"></a>2. 创建应用</h3><p><code>react-native init demo</code></p>
+<h3 id="3-写法与代码结构"><a href="#3-写法与代码结构" class="headerlink" title="3. 写法与代码结构"></a>3. 写法与代码结构</h3><p>React Native和React的基本业务逻辑与项目结构是相通的，除了组件是从react-native的包里引用，样式是css的子集，其他的都是页面的生命周期，渲染逻辑，diff都与React无异。</p>
+<p><a href="http://git.innotechx.com/projects/X/repos/mms-rn/browse" target="_blank" rel="noopener">萌推商家APP代码</a></p>
+<p>Android/IOS目录分别承载这各自应用架构与bundle入口，src部分会打包成jsbundle，然后通过Native的入口注入。</p>
+<ul>
+<li>打开AS与Xcode查看一下对应平台代码</li>
+</ul>
+<h3 id="4-RN的运行机制"><a href="#4-RN的运行机制" class="headerlink" title="4.RN的运行机制"></a>4.RN的运行机制</h3><p>看到这里会有这样的一个疑问<code>为什么js代码可以运行在APP中？</code></p>
+<blockquote>
+<p>是因为RN有两个核心</p>
+</blockquote>
+<ul>
+<li>JSC引擎：1 → 因为RN的包里一个有JS执行引擎（WebKit的内核JavaScriptCore），所以它可以运行js代码。（前期是JSC的环境，在0.60.x之后添加了Hermes作为js引擎）。<blockquote>
+</blockquote>
+<a href="https://cloud.tencent.com/developer/article/1492194" target="_blank" rel="noopener">干货 | 加载速度提升15%，携程对RN新一代JS引擎Hermes的调研</a><blockquote>
+</blockquote>
+<a href="https://sourcegraph.com/github.com/facebook/react-native@0.30-stable/-/blob/ReactCommon/cxxreact/JSCExecutor.cpp#L24:11" target="_blank" rel="noopener">React Native JSC源码</a><blockquote>
+</blockquote>
+</li>
+<li>JSI通信：其实就是JSBridge，作为JS与Native的桥梁，运行在JSC环境下，通过C++实现的Native类的代理对象，这样就可以实现JS与Native通信。</li>
+</ul>
+<p>所以：JSC/Hermes会将作为JS的运行环境（解释器），JS层通过JSI获取到对应的C++层的module对象的代理，最终通过JNI回调Java层的module，在通过JNI映射到Native的函数。</p>
+<p><a href="https://sourcegraph.com/github.com/facebook/react-native@v0.63.0-rc.1/-/tree/ReactAndroid/src/main/java/com/facebook/react/views/text" target="_blank" rel="noopener">RN Native Android Module源码</a></p>
+<p><a href="https://sourcegraph.com/github.com/facebook/react-native@v0.63.0-rc.1/-/blob/React/Views/RCTView.m" target="_blank" rel="noopener">RN Native IOS Module源码</a></p>
+<p>所以，RN中所有的标签其实都不是真是的控件，js代码中所有的控件，都是一个“Map对中的key”，JS通过这个key组合的DOM，放到VDOM的js数据结构中，然后通过JSBridge代理到Native，Native端会解析这个DOM，从而获得对应的Native的控件。</p>
+<h3 id="5-怎么实现一个Native-Bridge的功能。（先不讲）"><a href="#5-怎么实现一个Native-Bridge的功能。（先不讲）" class="headerlink" title="5.怎么实现一个Native Bridge的功能。（先不讲）"></a>5.怎么实现一个Native Bridge的功能。（先不讲）</h3><blockquote>
+<p>例子：实现判断应用是否开启通知，如果未打开通知则进入设置页面开启通知。</p>
+</blockquote>
+<p>5.1 <code>IOS端</code></p>
+<ul>
+<li>IOS在 React Native 中，一个“原生模块”就是一个实现了“RCTBridgeModule”协议的 Objective-C 类。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation&#x2F;Foundation.h&gt;</span><br><span class="line">#import &lt;React&#x2F;RCTEventEmitter.h&gt;</span><br><span class="line"></span><br><span class="line">@interface RNDataTransferManager : RCTEventEmitter &lt;RCTBridgeModule&gt;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;RNDataTransferManager.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation RNDataTransferManager</span><br><span class="line"></span><br><span class="line">RCT_EXPORT_MODULE();</span><br><span class="line">&#x2F;&#x2F; 判断notification是否开启</span><br><span class="line">RCT_EXPORT_METHOD(isNotificationEnabled:(RCTPromiseResolveBlock)resolve</span><br><span class="line">                  rejecter:(RCTPromiseRejectBlock)reject) &#123;</span><br><span class="line">  BOOL isEnable &#x3D; NO;</span><br><span class="line">  UIUserNotificationSettings *setting &#x3D; [[UIApplication sharedApplication] currentUserNotificationSettings];</span><br><span class="line">  isEnable &#x3D; (UIUserNotificationTypeNone &#x3D;&#x3D; setting.types) ? NO : YES;</span><br><span class="line">  return resolve(@(isEnable));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 进入设置开启Notification</span><br><span class="line">RCT_EXPORT_METHOD(gotoOpenNotification) &#123;</span><br><span class="line">  [self goToAppSystemSetting];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意两个宏：</p>
+<p><code>RCT_EXPORT_METHOD</code>：用来设置给JS导出的Native Module名字。</p>
+<p><code>RCT_EXPORT_MODULE</code>：给JS提供的方法通过<code>RCT_EXPORT_METHOD()</code>宏实现，必须明确的声明要给 JavaScript 导出的方法，否则 React Native 不会导出任何方法。</p>
+<p>5.2 <code>Android端</code></p>
+<p>首先新建一个JavaModule类继承ReactContextBaseJavaModule。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">public class RNDataTransferManager extends ReactContextBaseJavaModule &#123;</span><br><span class="line"></span><br><span class="line">    private static ReactApplicationContext reactContext;</span><br><span class="line"></span><br><span class="line">    public static RNDataTransferManager rnDataTransferManager;</span><br><span class="line"></span><br><span class="line">    public static String currentBindAlias &#x3D; &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    public RNDataTransferManager(@Nonnull ReactApplicationContext reactContext) &#123;</span><br><span class="line">        super(reactContext);</span><br><span class="line">        this.reactContext &#x3D; reactContext;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static RNDataTransferManager getInstance() &#123;</span><br><span class="line">        if (null &#x3D;&#x3D; rnDataTransferManager) &#123;</span><br><span class="line">            rnDataTransferManager &#x3D; new RNDataTransferManager(reactContext);</span><br><span class="line">        &#125;</span><br><span class="line">        return rnDataTransferManager;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Nonnull</span><br><span class="line">    @Override</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return &quot;RNDataTransferManager&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        @ReactMethod</span><br><span class="line">    public void isNotificationEnabled(Promise promise) &#123;</span><br><span class="line">        if (promise !&#x3D; null) &#123;</span><br><span class="line">            if (MainApplication.getContext() !&#x3D; null) &#123;</span><br><span class="line">                if (NotificationManagerCompat.from(MainApplication.getContext())</span><br><span class="line">                        .areNotificationsEnabled()) &#123;</span><br><span class="line">                    Log.e(&quot;push&quot;, &quot;推送开启 isNotificationEnabled -&gt; true&quot;);</span><br><span class="line">                    promise.resolve(true);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    Log.e(&quot;push&quot;, &quot;推送未开启 isNotificationEnabled -&gt; false&quot;);</span><br><span class="line">                    promise.resolve(false);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                promise.resolve(false);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ReactMethod</span><br><span class="line">    public boolean gotoOpenNotification() &#123;</span><br><span class="line">        if (MainApplication.getContext() &#x3D;&#x3D; null) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        Intent intent &#x3D; getSetIntent(MainApplication.getContext());</span><br><span class="line">        PackageManager packageManager &#x3D; MainApplication.getContext().getPackageManager();</span><br><span class="line">        List&lt;ResolveInfo&gt; list &#x3D; packageManager.queryIntentActivities(intent, 0);</span><br><span class="line">        if (list !&#x3D; null &amp;&amp; list.size() &gt; 0) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                MainApplication.getContext().startActivity(intent);</span><br><span class="line">                return true;</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>写好了Native Module之后需要注册模块。</p>
+<p>1）首先通过ReactPackage的createNativeModules来注册模块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">package com.mengtuiapp.mms.bridge;</span><br><span class="line"></span><br><span class="line">import com.facebook.react.ReactPackage;</span><br><span class="line">import com.facebook.react.bridge.NativeModule;</span><br><span class="line">import com.facebook.react.bridge.ReactApplicationContext;</span><br><span class="line">import com.facebook.react.uimanager.ViewManager;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import javax.annotation.Nonnull;</span><br><span class="line"></span><br><span class="line">public class DataTransferPackage implements ReactPackage &#123;</span><br><span class="line"></span><br><span class="line">    private RNDataTransferManager transferModule;</span><br><span class="line"></span><br><span class="line">    @Nonnull</span><br><span class="line">    @Override</span><br><span class="line">    public List&lt;NativeModule&gt; createNativeModules(@Nonnull ReactApplicationContext reactContext) &#123;</span><br><span class="line">        List&lt;NativeModule&gt; nativeModules &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        transferModule &#x3D; new RNDataTransferManager(reactContext);</span><br><span class="line">        RNDataTransferManager.rnDataTransferManager &#x3D; transferModule;</span><br><span class="line">        nativeModules.add(transferModule);</span><br><span class="line">        return nativeModules;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Nonnull</span><br><span class="line">    @Override</span><br><span class="line">    public List&lt;ViewManager&gt; createViewManagers(@Nonnull ReactApplicationContext reactContext) &#123;</span><br><span class="line">        return Collections.emptyList();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2）然后让你的应用拿到注册到的package，需要在Application的getPackages方法中提供。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected List&lt;ReactPackage&gt; getPackages() &#123;</span><br><span class="line">                 List&lt;ReactPackage&gt; packages &#x3D; new PackageList(this).getPackages();</span><br><span class="line">                 packages.add(new DataTransferPackage());</span><br><span class="line">                 packages.add(new RNInstallApkPackage());</span><br><span class="line">                 packages.add(new RNUserAgentPackage());</span><br><span class="line">                 packages.add(new RNKeyboardAdjustPackage());</span><br><span class="line">                 packages.add(new CodePush(mContext.getString(R.string.InnotechCodepushKey), mContext, this.moduleId, BuildConfig.DEBUG, mContext.getString(R.string.InnotechCodepushServerUrl)));</span><br><span class="line">                 return packages;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.3 JS端调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NativeModules.RNDataTransferManager.gotoOpenNotification()</span><br><span class="line">就可以前往应用设置页面打开通知。</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>当然我们实际开发中不会围绕这么多Native Module来做文章，但是可以看出，做RN是需要一个基本的原生的操作能力。</li>
+</ul>
+<h3 id="6-这样做的优势和问题"><a href="#6-这样做的优势和问题" class="headerlink" title="6. 这样做的优势和问题"></a>6. 这样做的优势和问题</h3><h4 id="优势："><a href="#优势：" class="headerlink" title="优势："></a>优势：</h4><blockquote>
+<ul>
+<li>相比Hybrid性能更高、因为都是原生组件的渲染。</li>
+<li>从render到virtual dom的过程都是React驱动，具备React的一切优秀特性，可以使用React的社区优秀工具。</li>
+<li>项目搭建起来了，用JS写APP又具有原生的渲染效率简直爽，一份代码Android、IOS、web都可以适配（毕竟vDom层是一样的，jsbridge就随你魔改了）。</li>
+<li>相比原生的编译速度，开发JS使用HotReload简直太爽了。</li>
+</ul>
+</blockquote>
+<h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><blockquote>
+<ul>
+<li>跨平台，但是Android、IOS毕竟是不同的系统与生态，组件与功能都有一些跨平台的差异，RN的原生组件的平台差异性很大。</li>
+<li>性能问题：动画性能不好、列表数据量大性能不好，主要集中在低端机，大数据列表快速滑动会有白屏，动画层级多在Android低于30fps的情况频繁。</li>
+<li>白屏问题，加载bundle的时间会有一个白屏出现，需要手动改Native代码。</li>
+<li>开发业务功能不需要原生能力，但是开发一个完整的跨平台项目，是需要具备一定的双端原生能力（有很多要写Native的，许多功能和组件也需要自己封装）</li>
+<li>这也是RN做的不好的地方，版本迭代太慢，不痛不痒的迭代了5年了，很多问题还是没有解决。这也是Flutter为什么这么火的原因。</li>
+</ul>
+</blockquote>
+<h3 id="7-那么Flutter怎么做的"><a href="#7-那么Flutter怎么做的" class="headerlink" title="7. 那么Flutter怎么做的"></a>7. 那么Flutter怎么做的</h3><p>Flutter使用Dart作为开发语言，作为一个AOT框架，Flutter是在运行时直接将Dart转化成客户端的可执行文件，然后通过Skia渲染引擎直接渲染到硬件平台。如果说RN是为开发者做了平台兼容，那Flutter更像是为开发者屏蔽了平台的概念。RN需要被转译为本地对应的组件，而Flutter是直接编译成可执行文件并渲染到设备。Flutter可以直接控制屏幕上的每一个像素，这样就可以避免由于使用JSBridge导致的性能问题。</p>
+<blockquote>
+</blockquote>
+<p>三要素：</p>
+<blockquote>
+</blockquote>
+<ul>
+<li>Dart语言开发。</li>
+<li>任何Dart代码都是AOT运行前编译成本地可执行文件，使用Skia（渲染引擎）直接渲染到本机。</li>
+<li>不使用原生的组件，具有自己的widget库，开发时构建自己的widget树来画页面。</li>
+</ul>
+<h5 id="如果是页面级的应用来说，Flutter是不需要任何原生代码来写组件，所有组件和页面都可以通过Flutter直接写好。"><a href="#如果是页面级的应用来说，Flutter是不需要任何原生代码来写组件，所有组件和页面都可以通过Flutter直接写好。" class="headerlink" title="如果是页面级的应用来说，Flutter是不需要任何原生代码来写组件，所有组件和页面都可以通过Flutter直接写好。"></a>如果是页面级的应用来说，Flutter是不需要任何原生代码来写组件，所有组件和页面都可以通过Flutter直接写好。</h5><h4 id="7-1-Flutter代码结构"><a href="#7-1-Flutter代码结构" class="headerlink" title="7.1 Flutter代码结构"></a>7.1 Flutter代码结构</h4><p><a href="https://gitlab.innotechx.com/xuanjiawei/flutter_mms_app" target="_blank" rel="noopener">萌推商家APP Flutter版本</a></p>
+<h4 id="7-2-Flutter运行与调试"><a href="#7-2-Flutter运行与调试" class="headerlink" title="7.2 Flutter运行与调试"></a>7.2 Flutter运行与调试</h4><p>直接演示。</p>
+<h3 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a>8. 总结</h3><p>今天我们主要看了一下两个框架开发时的代码结构，与代码书写形式，还有简单了解了一下它是怎么运行。那之后如果小伙伴想继续去学习，或做一个自己的应用，还有以下几个方面需要注意：</p>
+<pre><code>1. APP初始化与生命周期状态。
+2. 数据持久化 - 数据管理、SP、本地数据库。
+3. 碎片化处理。
+4. 打包三要素：Android（混淆、签名、加固），IOS（生成证书、导入证书、使用证书）。
+5. 拆包、热更新、原生集成。</code></pre><p>Flutter因为自带了渲染引擎，理论上是要比RN渲染效率要高，但是其实实际使用上，在性能过剩的移动端设备中，并没有出现特别大的差异，而Facebook的团队在Flutter的持续施压之下也决定重构底层，并在最近几个版本有了一些进步，所以大家有兴趣的都可以研究一下。</p>
+
+	
+	</div>
+  <a type="button" href="/2020/05/28/跨平台开发指北/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2020/05/28/hello-world/" >Hello World</a>
 		</h3>
 		</div>
@@ -375,6 +532,10 @@ var _hmt = _hmt || [];
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2020/05/28/跨平台开发指北/" ><i class="fa fa-file-o"></i>跨平台开发指北</a>
+      </li>
     
       <li>
         <a href="/2020/05/28/hello-world/" ><i class="fa fa-file-o"></i>Hello World</a>
