@@ -1,5 +1,5 @@
 ---
-title: Mobx使用指北(基础介绍)
+title: mobx使用指北
 date: 2019-08-15 10:22:31
 tags: MobX
 ---
