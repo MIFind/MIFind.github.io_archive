@@ -1,52 +1,29 @@
 ---
 title: ReactNative集成到现有原生项目、拆包、热更新
 date: 2020-06-15 15:43:27
-tags: react native
+tags:
 ---
-{: id="20210222104133-95ci8wv" updated="20210222104235"}
 
 # ReactNative 集成到现有原生项目、拆包、热更新
-{: id="20210222104133-5dhqyas"}
 
 ---
 
 如果你正准备从头开始制作一个新的应用，那么 React Native 会是个非常好的选择。但是大多数项目我们已经有一个原生应用，React Native 作为业务 module，集成到原生应用中。我们一个应用中可能有很多 RN 业务模块，那 module 拆包、热更新就尤为重要。
-{: id="20210222104133-tna10z5"}
 
 ## 集成到现有原生项目
-{: id="20210222104133-vmyz2td"}
 
 ### 集成到原生项目，首先要安装 RN 开发环境。
-{: id="20210222104133-yo0dm16"}
 
-1. {: id="20210222104133-p7karmt"}[搭建 RN 开发环境](https://reactnative.cn/docs/getting-started.html)
-   {: id="20210222104203-jakagf3"}
-{: id="20210222104203-wkdwnv5"}
-
-{: }
-2. {: id="20210222104133-iqkjay0"}由于是集成到现有原生项目，不需要 init 一个新的 RN 项目。
-{: id="20210222104203-4e1o1bs"}
-
-1. {: id="20210222104133-iibyj3l"}获取 RN 项目库，并执行`npm install`，安装 RN 项目所需要依赖。
-   {: id="20210222104203-dr1j8r5"}
-{: id="20210222104203-fgd1cuv"}
-
-{: }
-2. {: id="20210222104133-8o1menq"}如果没有 RN 项目库，需要同步当前需要集成的 RN 项目的 package.json，并执行`npm install`
-{: }
-{: id="20210222104133-iws0yq6"}
-
-{: }
-{: id="20210222104133-42fpp97"}
+1. [搭建 RN 开发环境](https://reactnative.cn/docs/getting-started.html)
+2. 由于是集成到现有原生项目，不需要 init 一个新的 RN 项目。
+   1. 获取 RN 项目库，并执行`npm install`，安装 RN 项目所需要依赖。
+   2. 如果没有 RN 项目库，需要同步当前需要集成的 RN 项目的 package.json，并执行`npm install`
 
 ### 1 Android
-{: id="20210222104133-98bpu4y"}
 
 #### 1. project gradle 添加配置
-{: id="20210222104133-ggvmp2x"}
 
 在项目的 build.gradle 文件中为 React Native 添加一个 maven 依赖的入口，必须写在 "allprojects" 代码块中。
-{: id="20210222104133-5t1pg7t"}
 
 ```
 allprojects {
@@ -70,13 +47,10 @@ allprojects {
 }
 
 ```
-{: id="20210222104133-x62nhli"}
 
 #### 2. app gradle 添加配置
-{: id="20210222104133-j2bkjjd"}
 
 在 app 中 build.gradle 文件中添加 React Native 依赖:
-{: id="20210222104133-uem0iq2"}
 
 ```
 //rn
@@ -97,10 +71,8 @@ def safeExtGet(prop, fallback) {
 }
 //rn end
 ```
-{: id="20210222104133-d31kz4x"}
 
 添加 gradle 依赖
-{: id="20210222104133-hp7hkw9"}
 
 ```
 //rn
@@ -125,21 +97,16 @@ def safeExtGet(prop, fallback) {
     implementation project(':@innotechx_react-native-code-push')
     //rn end
 ```
-{: id="20210222104133-sku4l1i"}
 
 最下面添加 codepush 引用。
-{: id="20210222104133-2v38uns"}
 
 ```
 apply from: file("../../node_modules/@innotechx/react-native-code-push/android/codepush.gradle")
 ```
-{: id="20210222104133-plyfxdr"}
 
 注意确认 node_modules 所在的目录位置。
-{: id="20210222104133-fj315my"}
 
 #### 3. settings.gradle 添加配置
-{: id="20210222104133-i7gwjtb"}
 
 ```
 include ':@innotechx_react-native-code-push'
@@ -161,31 +128,24 @@ include ':@react-native-community_masked-view'
 project(':@react-native-community_masked-view').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/masked-view/android')
 
 ```
-{: id="20210222104133-sxy5kn2"}
 
 #### 4. AndroidManifest.xml
-{: id="20210222104133-tahc1ys"}
 
 1 声明网络权限<br>
 `<uses-permission android:name="android.permission.INTERNET" />`
-{: id="20210222104133-u5thw64"}
 
 2 添加开发者菜单<br>
 `<activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />`
-{: id="20210222104133-x27vpy8"}
 
 3 network_security_config.xml(API level 28+)<br>
-{: id="20210222104133-1g7me5j"}
 
 ```
 <application
   android:networkSecurityConfig="@xml/network_security_config">
 </application>
 ```
-{: id="20210222104133-0q26ppz"}
 
 在`/res/xml`中添加`network_security_config.xml`
-{: id="20210222104133-xods5g0"}
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -193,38 +153,18 @@ project(':@react-native-community_masked-view').projectDir = new File(rootProjec
     <base-config cleartextTrafficPermitted="true" />
 </network-security-config>
 ```
-{: id="20210222104133-mglq59g"}
 
 #### 4. 将兜底包放到 assets 目录下
-{: id="20210222104133-k8nvccz"}
 
 #### 5. 根据 demo 改造原生代码
-{: id="20210222104133-n66hha4"}
 
 主要为加载 bundle、拆包、热更新的相关实现。
-{: id="20210222104133-t42jtyq"}
 
-- {: id="20210222104133-jup9wae"}JsLoaderUtil
-  {: id="20210222104203-udmaaib"}
-{: id="20210222104203-rfh8oci"}
-
-{: }
-{: id="20210222104203-wk7x386"}
-
-- {: id="20210222104133-0e2hwyz"}BaseReactActivity
-  {: id="20210222104203-y2v1ksi"}
-{: id="20210222104203-st9w2or"}
-
-{: }
-{: id="20210222104203-ujle8kr"}
-
-- {: id="20210222104133-7o01vuo"}SpConfig
-  {: }
-  {: id="20210222104203-jqbgcb6"}
-{: id="20210222104133-3qotvlp"}
+- JsLoaderUtil
+- BaseReactActivity
+- SpConfig
 
 对 Application 的改造: 继承 ReactApplication。
-{: id="20210222104133-cf9rucx"}
 
 ```
 
@@ -292,10 +232,8 @@ public class MainApplication extends Application implements ReactApplication {
 }
 
 ```
-{: id="20210222104133-nhms8t1"}
 
 当前实现是基于基类`BaseReactActivity`，这样加载 RN module 的业务组件只需要继承`BaseReactActivity`即可。
-{: id="20210222104133-ltft310"}
 
 ```
 public class Business1Activity extends BaseReactActivity {
@@ -317,22 +255,16 @@ public class Business1Activity extends BaseReactActivity {
 }
 
 ```
-{: id="20210222104133-y9zd6ug"}
 
 **注意**： 如果 Android 项目的根目录名就是 android，才可以使用自动引用，就不需要 settings.gradle 与 app build.gradle 里做手动引用依赖，相应的 MainApplication 的 add package 也需要修改。
-{: id="20210222104133-4pvw6gd"}
 
 **CodePush 相关**：[相关配置参考](https://developer.qutoutiao.net/wiki/#/8/README?id=android)
-{: id="20210222104133-svxucro"}
 
 ### 2 IOS
-{: id="20210222104133-iqxt7a5"}
 
 #### 1. Podfile 修改
-{: id="20210222104133-2vzkqpb"}
 
 将以下 Podfile 内容配置到你的 Podfile 文件里，`pod install`
-{: id="20210222104133-hsarpyt"}
 
 ```
 platform :ios, '9.0'
@@ -381,35 +313,16 @@ target 'reactnative_multibundler' do
   use_native_modules!
 end
 ```
-{: id="20210222104133-yhnc9s2"}
 
 #### 2. 将兜底包放到项目里
-{: id="20210222104133-u54p903"}
 
 #### 3. 根据 demo 改造原生代码
-{: id="20210222104133-vq4dmzl"}
 
 主要为加载 bundle、拆包、热更新的相关实现。
-{: id="20210222104133-ov8g2wr"}
 
-- {: id="20210222104133-i91dhh1"}ScriptLoadUtil
-  {: id="20210222104203-tz7eptz"}
-{: id="20210222104203-ovtzqjp"}
-
-{: }
-{: id="20210222104203-vkn4v7k"}
-
-- {: id="20210222104133-2q3fzaz"}ReactController
-  {: id="20210222104203-85jw8mt"}
-{: id="20210222104203-njw1d2w"}
-
-{: }
-{: id="20210222104203-jnw8ty0"}
-
-- {: id="20210222104133-ck0g9pg"}RctBridge
-  {: }
-  {: id="20210222104203-ltuslti"}
-{: id="20210222104133-nz160uc"}
+- ScriptLoadUtil
+- ReactController
+- RctBridge
 
 ```
 1、暴露RCTBridge的executeSourceCode方法，做法为将本项目中的RCTBridge添加到自己的工程
@@ -435,133 +348,91 @@ NSURL *jsCodeLocationBuz = [[NSBundle mainBundle] URLForResource:bundleName with
 RCTRootView* view = [[RCTRootView alloc] initWithBridge:bridge moduleName:moduleName initialProperties:nil];
 
 ```
-{: id="20210222104133-l8w5vn6"}
 
 **CodePush 相关**：[相关配置参考](https://developer.qutoutiao.net/wiki/#/8/README?id=ios)
-{: id="20210222104133-eprxfqq"}
 
 ---
 
 ## ReactNative 拆包与多业务开发
-{: id="20210222104133-9a6ejxf"}
 
-1. {: id="20210222104133-mquck4d"}创建业务<br>
+1. 创建业务<br>
    `npm run create`会在`/src/modules`里创建业务模块。
-   {: id="20210222104133-vn55oy5"}
-{: id="20210222104203-vuzobzy"}
 
-{: }
-{: id="20210222104203-4gs1g6d"}
-
-2. {: id="20210222104133-au74lmr"}开发与 debug<br>
+2. 开发与 debug<br>
    `npm run start`开启 metro packager，然后在集成好的 Native 项目查看效果（或者打开 RNHybrid Demo 查看效果）
-   {: id="20210222104133-o7u7f7g"}
-{: id="20210222104203-mmfux6x"}
 
-{: }
-{: id="20210222104203-ofwf4iq"}
-
-3. {: id="20210222104133-knwufka"}打包<br>
+3. 打包<br>
    通过`npm run bundler`打包基础包与业务包。 1. 基础包配置<br>
-   {: id="20210222104133-3cxwpbt"}
-
-   ```
-   	基础包入口 - basic.js
-   	import React from 'react'
-   	import { Text } from 'react-native'
-   	import 'react-native'
-   	import 'mobx'
-   	import 'mobx-react'
-   	import 'mobx-react-lite'
-   	import 'react-native-gesture-handler'
-   	import 'react-native-safe-area-context'
-   	import 'react-native-reanimated'
-   	import 'react-native-screens'
-
-   	import '@innotechx/react-native-code-push'
-
-   	import '@react-native-community/masked-view'
-   	import '@react-navigation/stack'
-   	import '@react-navigation/native'
-
-   	const wrap = require('lodash.wrap')
-
-   	Text.render = wrap(Text.render, function(func, ...args) {
-   	  const originText = func.apply(this, args)
-   	  return React.cloneElement(originText, { allowFontScaling: false })
-   	})
 
 
-   ```
-   {: id="20210222104133-6oykgp1"}
+    ```
+    	基础包入口 - basic.js
+    	import React from 'react'
+    	import { Text } from 'react-native'
+    	import 'react-native'
+    	import 'mobx'
+    	import 'mobx-react'
+    	import 'mobx-react-lite'
+    	import 'react-native-gesture-handler'
+    	import 'react-native-safe-area-context'
+    	import 'react-native-reanimated'
+    	import 'react-native-screens'
 
-   基础包会将在入口配置的node_modules相关的引用与全局公共配置到basic.bundle.js
-   {: id="20210222104133-0efm03n"}
+    	import '@innotechx/react-native-code-push'
 
-   ```
-   {
-     name: 'basic.js', // 模块入口文件名称
-     isBase: true, // 是否是基础模块
-     isAll: false,
-     metroConfig: 'metro_basic.config.js', // 模块metro 配置文件，这个必须在项目根目录，rn 的 metro 只读取根目录文件
-     bundleName: {
-       android: 'basic.android.bundle', // 输出名称
-       ios: 'basic.bundle',
-     },
-   },
-   ```
-   {: id="20210222104133-pv1sukq"}
+    	import '@react-native-community/masked-view'
+    	import '@react-navigation/stack'
+    	import '@react-navigation/native'
 
-   2. {: id="20210222104133-m0owcqr"}业务包
-      {: }
-      {: id="20210222104203-gjpf1oi"}
-   {: id="20210222104133-jxr03y8"}
+    	const wrap = require('lodash.wrap')
 
-   业务包配置
-   {: id="20210222104133-o4w1c0r"}
+    	Text.render = wrap(Text.render, function(func, ...args) {
+    	  const originText = func.apply(this, args)
+    	  return React.cloneElement(originText, { allowFontScaling: false })
+    	})
 
-   ```
-   {
-     name: 'buz_act_618.js', // 模块入口文件名称
-     isBase: false, // 是否是基础模块
-     metroConfig: 'metro_buz.config.js',
-     bundleName: {
-       android: 'act_618.android.bundle',
-       ios: 'act_618.bundle',
-     },
-   },
-   ```
-   {: id="20210222104133-0utqp0l"}
-{: id="20210222104203-11ijhh4"}
 
-{: }
-{: id="20210222104133-p6kjw79"}
+    ```
+
+    基础包会将在入口配置的node_modules相关的引用与全局公共配置到basic.bundle.js
+
+    ```
+    {
+      name: 'basic.js', // 模块入口文件名称
+      isBase: true, // 是否是基础模块
+      isAll: false,
+      metroConfig: 'metro_basic.config.js', // 模块metro 配置文件，这个必须在项目根目录，rn 的 metro 只读取根目录文件
+      bundleName: {
+        android: 'basic.android.bundle', // 输出名称
+        ios: 'basic.bundle',
+      },
+    },
+    ```
+
+    2. 业务包
+
+    业务包配置
+
+    ```
+    {
+      name: 'buz_act_618.js', // 模块入口文件名称
+      isBase: false, // 是否是基础模块
+      metroConfig: 'metro_buz.config.js',
+      bundleName: {
+        android: 'act_618.android.bundle',
+        ios: 'act_618.bundle',
+      },
+    },
+    ```
 
 通过 npm run bundler 打包会在 bundles 路径生成相应 bundle.
-{: id="20210222104133-udpckdn"}
 
-4. {: id="20210222104133-s75fbjn"}上传包到平台
-   {: id="20210222104203-lq067m9"}
-
-   1. {: id="20210222104133-9ottgez"}`npm run bundler:upload`
-      {: id="20210222104203-ce2ftfv"}
-   {: id="20210222104203-63cafzu"}
-
-   {: }
-   2. {: id="20210222104133-ij6y5qs"}CI/CD（待完善）
-   {: }
-   {: id="20210222104133-rxe5f64"}
-{: id="20210222104203-sjpy3be"}
-
-{: }
-{: id="20210222104133-4ulh8f7"}
+4.  上传包到平台
+    1.  `npm run bundler:upload`
+    2.  CI/CD（待完善）
 
 **大前端 RN 平台**
 [测试](http://fe-qa.qttcs3.cn/)
 [生产](http://fe.qutoutiao.net/)
-{: id="20210222104133-pe7sehg"}
 
 ---
-
-
-{: id="20210222104133-sgy6ef8" type="doc"}
