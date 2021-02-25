@@ -6,7 +6,7 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>Archives: 2019 | MIFind With Daria.</title>
+  <title>Kraken架构设计及Kraken_internal | MIFind With Daria.</title>
   <meta name="author" content="MIFind">
   
   <meta name="description" content="永远相信美好的事情即将发生 —— Always believe that good things are about to happen.">
@@ -14,7 +14,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="Kraken架构设计及Kraken_internal"/>
   <meta property="og:site_name" content="MIFind With Daria."/>
 
   
@@ -115,196 +115,176 @@ var _hmt = _hmt || [];
   	<div class="content">
     	 
 
-<!-- title -->
-<div class="page-header">
-  <h1 class="archive-title"><i class="fa fa-archive"></i> 2019</h1>
-</div>
 
-<div class="row page">
-  <!-- cols -->
-  
-  <div class="col-md-9">
 	
-
-	  <div id="top_search"></div>
-
-	  <div class="archive">
-		
-		
-		
-			
-			
-			<h4 class="archive-ul" data-toggle="collapse" data-target="#2021">2021<b class="caret"></b></h4>
-			<ul id="2021" class="collapse in">
-			
-		
-		<li class="listing-item">
-		<span class="date_class"> 2021-02-22 </span> &raquo;
-		
-		   <span class="title"><a href="/2021/02/22/淘宝Kraken架构/" >Kraken架构设计及Kraken_internal</a></span>
-		
-		</li>			
-		
-		
-		
-		<li class="listing-item">
-		<span class="date_class"> 2021-02-22 </span> &raquo;
-		
-		   <span class="title"><a href="/2021/02/22/跨端通信难题/" >跨端通信难题</a></span>
-		
-		</li>			
-		
-		
-		
-			
-			</ul>
-			
-			
-			<h4 class="archive-ul" data-toggle="collapse" data-target="#2020">2020<b class="caret"></b></h4>
-			<ul id="2020" class="collapse in">
-			
-		
-		<li class="listing-item">
-		<span class="date_class"> 2020-07-02 </span> &raquo;
-		
-		   <span class="title"><a href="/2020/07/02/resume/" >个人简历</a></span>
-		
-		</li>			
-		
-		
-		
-		<li class="listing-item">
-		<span class="date_class"> 2020-06-15 </span> &raquo;
-		
-		   <span class="title"><a href="/2020/06/15/ReactNativeInNative/" >ReactNative集成到现有原生项目、拆包、热更新</a></span>
-		
-		</li>			
-		
-		
-		
-		<li class="listing-item">
-		<span class="date_class"> 2020-05-28 </span> &raquo;
-		
-		   <span class="title"><a href="/2020/05/28/跨平台开发指北/" >跨平台开发指北</a></span>
-		
-		</li>			
-		
-		
-		
-			
-			</ul>
-			
-			
-			<h4 class="archive-ul" data-toggle="collapse" data-target="#2019">2019<b class="caret"></b></h4>
-			<ul id="2019" class="collapse in">
-			
-		
-		<li class="listing-item">
-		<span class="date_class"> 2019-08-15 </span> &raquo;
-		
-		   <span class="title"><a href="/2019/08/15/mobx/" >mobx使用指北</a></span>
-		
-		</li>			
-		
-		
-		
-		<li class="listing-item">
-		<span class="date_class"> 2019-07-25 </span> &raquo;
-		
-		   <span class="title"><a href="/2019/07/25/装饰器/" >装饰器 Decorator</a></span>
-		
-		</li>			
-		
-		</ul>
+		<div class="page-header">
+			<h1> Kraken架构设计及Kraken_internal</h1>
 		</div>
-
-</div> <!-- col-md-9/col-md-12 -->
-
-
-<div class="col-md-3">
-	<div id="sidebar">
 	
-			
-  <div id="site_search">
-   <div class="form-group">
-    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
-   </div>  
-  <div id="local-search-result"></div>
-  </div>
 
 
-		
-			
-		
-			
-	<div class="widget">
-		<h4>Tag Cloud</h4>
-		<ul class="tag_box inline list-unstyled">		
-		
-			<li><a href="/tags/Javascript/">Javascript<span>1</span></a></li>
-		
-			<li><a href="/tags/Flutter/">Flutter<span>1</span></a></li>
-		
-			<li><a href="/tags/MobX/">MobX<span>1</span></a></li>
-		
-			<li><a href="/tags/resume/">resume<span>1</span></a></li>
-		
-		 
-		</ul>
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="Kraken架构设计及Kraken-internal"><a href="#Kraken架构设计及Kraken-internal" class="headerlink" title="Kraken架构设计及Kraken_internal"></a>Kraken架构设计及Kraken_internal</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>对于一个跨端框架，我们希望的是：</p>
+<ul>
+<li>性能和体验接近原生</li>
+<li>基于前端体系</li>
+<li>可自定义扩展</li>
+<li>可动态发布</li>
+<li>可跨多平台</li>
+<li>多端UI一致性</li>
+<li>开发工具完善</li>
+</ul>
+<h2 id="Kraken机制"><a href="#Kraken机制" class="headerlink" title="Kraken机制"></a>Kraken机制</h2><p><img src="https://cdn.nlark.com/yuque/0/2020/png/297774/1594352149873-cdc720d8-7fe4-419b-aba6-dcf7c359014d.png?x-oss-process=image%2Fresize%2Cw_746" alt="image.png"></p>
+<ol>
+<li>Kraken的最上层是一个基于W3C标准而构建的DOM API，在下层是所依赖的JS引擎，通过C++构建Bridge与Dart通信。</li>
+<li>C++ Bridge把JS所调用的一些信息，转发到Dart层。</li>
+<li>Dart层通过接收这些信息，下沉到Flutter Render Engine，DOM Render Tree与Render Object进行对齐，实现高效的渲染性能。</li>
+</ol>
+<h2 id="Kraken-internal"><a href="#Kraken-internal" class="headerlink" title="Kraken_internal"></a>Kraken_internal</h2><p>Kraken_internal是用于构建DOM，DOM API，Timer，并代理bridge。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/297774/1594352267593-47c87366-07a8-4b09-b142-e61a530228e0.png?x-oss-process=image%2Fresize%2Cw_746" alt="image.png"></p>
+<p>这是Kraken DOM模型的抽象，提供了和浏览器一样的DOM API，并暴露在JS环境中，JS通过使用DOM API也就是来创建一个DOM树。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/297774/1594352338873-f2ff09a1-816f-499f-84a0-49a4e2f98a75.png?x-oss-process=image%2Fresize%2Cw_746" alt="image.png"></p>
+<p>而构建出这个DOM树并将DOM树信息与API调用给到Dart层进行处理的库就是Kraken_internal。</p>
+<h3 id="Kraken-internal-API"><a href="#Kraken-internal-API" class="headerlink" title="Kraken_internal API"></a>Kraken_internal API</h3><ul>
+<li><p>ES6-promise</p>
+</li>
+<li><p>DOM Api</p>
+<ul>
+<li><p>EventTarget</p>
+</li>
+<li><p>StyleDeclaration</p>
+</li>
+<li><p>Node</p>
+<ul>
+<li><p>TextNode</p>
+</li>
+<li><p>Element</p>
+<ul>
+<li>MediaElement</li>
+<li>CanvasElement</li>
+<li>ImageElement</li>
+<li>IframeELement</li>
+<li>AnimationPlayerElement</li>
+<li>ObjectElement</li>
+<li>AnchorELement</li>
+</ul>
+</li>
+<li><p>Comment</p>
+</li>
+<li><p>Document</p>
+</li>
+</ul>
+</li>
+<li><p>CookieStorage</p>
+</li>
+<li><p>Event</p>
+<ul>
+<li>PromiseEvent</li>
+<li>ErrorEvent</li>
+<li>CustormEvent</li>
+</ul>
+</li>
+<li><p>Network</p>
+<ul>
+<li>matchMedia</li>
+<li>websocket</li>
+<li>fetch</li>
+<li>URL</li>
+<li>location</li>
+<li>navigator</li>
+<li>requestAnimationFrame</li>
+<li>XMLHttpRequest</li>
+<li>Blob</li>
+<li>asyncStorage</li>
+<li>Performance</li>
+<li>MQTT</li>
+<li>methodChannel</li>
+</ul>
+</li>
+<li><p>history</p>
+</li>
+<li><p>window</p>
+</li>
+</ul>
+</li>
+</ul>
+	  
 	</div>
 
+	<div>
+  	<center>
+	<div class="pagination">
 
-		
-			
-<div class="widget">
-  <h4>Recent Posts</h4>
-  <ul class="entry list-unstyled">
     
-      <li>
-        <a href="/2021/02/22/淘宝Kraken架构/" ><i class="fa fa-file-o"></i>Kraken架构设计及Kraken_internal</a>
-      </li>
     
-      <li>
-        <a href="/2021/02/22/跨端通信难题/" ><i class="fa fa-file-o"></i>跨端通信难题</a>
-      </li>
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
     
-      <li>
-        <a href="/2020/07/02/resume/" ><i class="fa fa-file-o"></i>个人简历</a>
-      </li>
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-      <li>
-        <a href="/2020/06/15/ReactNativeInNative/" ><i class="fa fa-file-o"></i>ReactNative集成到现有原生项目、拆包、热更新</a>
-      </li>
+    <a href="/2021/02/22/跨端通信难题/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
     
-      <li>
-        <a href="/2020/05/28/跨平台开发指北/" ><i class="fa fa-file-o"></i>跨平台开发指北</a>
-      </li>
+
     
-  </ul>
 </div>
 
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
 		
-			
-<div class="widget">
-	<h4>Links</h4>
-	<ul class="blogroll list-unstyled">
 	
-		<li><i class="fa fa-github"></i><a href="https://github.com/wzpan/hexo-theme-freemind" title="Freemind's Github repository." target="_blank"]);">Freemind</a></li>
-	
-		<li><i class="fa fa-github"></i><a href="https://github.com/kristopolous/BOOTSTRA.386" title="BOOTSTRA.386's Github repository." target="_blank"]);">BOOTSTRA.386</a></li>
-	
-		<li><i class="fa fa-github"></i><a href="https://github.com/blackshow/hexo-theme-freemind.386" title="Freemind.386's Github repository." target="_blank"]);">Freemind.386</a></li>
-	
-		<li><i class="fa fa-github"></i><a href="http://www.github.com/mifind" title="My Github account." target="_blank"]);">My Github</a></li>
-	
-	</ul>
-</div>
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
 
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-02-22 
+	</div>
+	
 
+	<!-- categories -->
+    
+
+	<!-- tags -->
 		
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
 
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
 
 
 
